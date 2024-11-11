@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import '../../css/video.css'
 import {recommendedVideoList, watchedVideoList, Video} from '../interfaces/video'
 
+
 const HomePage = () => {
   const [videoList, setVideoList] = useState<Video[]>([]);
   const [videoMode, setVideoMode] = useState<string>('recommend');
@@ -13,6 +14,10 @@ const HomePage = () => {
 
   return (
     <main>
+      <div className='mode-btn-container'>
+        <button onClick={() => setVideoMode('history')}>Video History</button>
+        <button onClick={() => setVideoMode('recommend')}>Recommended Videos</button>
+      </div>
       <div className='video-grid'>
         {videoList.map((video) => {
           return (
