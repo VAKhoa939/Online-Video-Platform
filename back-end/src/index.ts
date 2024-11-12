@@ -9,9 +9,13 @@ app.use(cors())
 app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
+// Serve static files from the frontend/dist directory 
+app.use(express.static(path.join(__dirname, '../../front-end/dist')));
 
 app.get('*', (req, res) => { 
-  res.sendFile(path.join(__dirname, 'dist', 'index.html')); 
+  const des = path.join('..', __dirname, '../../front-end/dist', 'index.html')
+  console.log(des);
+  res.sendFile(des); 
 });
 
 app.listen(PORT, () => {
