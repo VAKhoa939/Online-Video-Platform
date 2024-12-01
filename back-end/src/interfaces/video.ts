@@ -1,4 +1,5 @@
 export default interface Video {
+  id: string;
   videoLink: string;
   thumbnail: string;
   time: string;

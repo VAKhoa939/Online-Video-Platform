@@ -1,33 +1,48 @@
 p {
-	margin-top: 0px;
-	margin-bottom: 16px;
+  margin-top: 0px;
+  margin-bottom: 16px;
 }
 
 body {
-	font-family: Roboto, Arial;
-	font-size: 16px;
-	font-weight: 400;
-	line-height: 1.5;
+  font-family: Roboto, Arial;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
   margin: 0;
-	padding: 57px 0 2000px 72px;
-	background-color: white;
-	color: rgb(33 37 41);
-	-webkit-text-size-adjust: 100%;
-	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  padding-top: 57px;
+  background-color: white;
+  color: rgb(33 37 41);
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 main {
-	display: block;
+  display: block;
+  min-height: calc(100vh - 57px);
 }
 
 a {
-	color: rgb(25 135 84);
-	text-decoration: underline;
+  color: none;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-input, button, select, optgroup, textarea {
-	margin: 0;
-	font-family: inherit;
-	font-size: inherit;
-	line-height: inherit;
+a:visited {
+  color: none;
+}
+
+input,
+button,
+select,
+optgroup,
+textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  box-sizing: border-box;
+}
+
+button {
+  cursor: pointer;
 }

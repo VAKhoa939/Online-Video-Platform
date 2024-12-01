@@ -1,45 +1,45 @@
-import '../../css/header.css'
+import "../../css/header.css";
+import { FaUpload, FaBell, FaUserCircle } from "react-icons/fa";
+import SearchBar from "./SearchBar";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
+
+const ICON_SIZE = 24;
 
 const Header = () => {
+  const navigate = useNavigate();
+  const { auth } = useAuth();
   return (
     <header className="header">
       <div className="left-section">
-        <img className="hamburger-menu" src="images/icons/hamburger-menu.svg"/>
-        <img className="youtube-logo" src="images/icons/youtube-logo.svg"/>
+        <h1 onClick={() => navigate("/")}>Online Video Platform</h1>
       </div>
 
       <div className="middle-section">
-        <input className="search-bar" type="text" placeholder="Search"/>
-        <button className="search-button">
-          <img className="search-icon" src="images/icons/search.svg"/>
-          <div className="tooltip">Search</div>
-        </button>
-        <button className="voice-search-button">
-          <img className="voice-search-icon" src="images/icons/voice-search-icon.svg"/>
-          <div className="tooltip">Search with your voice</div>
-        </button>
+        <SearchBar size={ICON_SIZE} />
       </div>
 
       <div className="right-section">
-        <div className="tooltip-container">
-          <img className="upload-icon" src="images/icons/upload.svg"/>
-          <div className="tooltip">Create</div>
+        <div className="icon-container">
+          <FaUpload size={ICON_SIZE} />
+          <div className="tooltip">Create video</div>
         </div>
-        <div className="tooltip-container">
-          <img className="youtube-apps-icon" src="images/icons/youtube-apps.svg"/>
-          <div className="tooltip">YouTube apps</div>
-        </div>
-        <div className="tooltip-container">
-          <img className="notifications-icon" src="images/icons/notifications.svg"/>
+        <div className="icon-container">
+          <FaBell size={ICON_SIZE} />
           <div className="notifications-count">3</div>
           <div className="tooltip">Notifications</div>
         </div>
-        <a href="https://www.youtube.com/@SuperSimpleDev">
-          <img className="current-user-picture" src="images/channel-pictures/my-channel.jpeg"/>
-        </a>
+        {auth.email ? (
+          <div className="icon-container">
+            <FaUserCircle size={ICON_SIZE} onClick={() => navigate("#")} />
+            <div className="tooltip">User email</div>
+          </div>
+        ) : (
+          <button onClick={() => navigate("/login")}>Login</button>
+        )}
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

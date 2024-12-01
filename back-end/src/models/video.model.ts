@@ -1,8 +1,9 @@
 import Video from "../interfaces/video";
 
-export function readAllVideos(): Video[] {
+export function readRecommendedVideos(): Video[] {
   return [
     {
+      id: "001",
       videoLink: "https://www.youtube.com/watch?v=n2RNcPRtAiY",
       thumbnail: "thumbnail-1.webp",
       time: "14:20",
@@ -14,6 +15,7 @@ export function readAllVideos(): Video[] {
       keywords: ["Tech", "AI"],
     },
     {
+      id: "002",
       videoLink: "https://www.youtube.com/watch?v=mP0RAo9SKZk",
       thumbnail: "thumbnail-2.webp",
       time: "8:22",
@@ -25,6 +27,7 @@ export function readAllVideos(): Video[] {
       keywords: ["Laugh", "Challenge"],
     },
     {
+      id: "003",
       videoLink: "https://www.youtube.com/watch?v=FgjPQQeTh1w",
       thumbnail: "thumbnail-3.webp",
       time: "9:13",
@@ -36,6 +39,7 @@ export function readAllVideos(): Video[] {
       keywords: ["Crazy", "Tik Toks", "DISASTER"],
     },
     {
+      id: "004",
       videoLink: "https://www.youtube.com/watch?v=094y1Z2wpJg",
       thumbnail: "thumbnail-4.webp",
       time: "22:09",
@@ -47,6 +51,7 @@ export function readAllVideos(): Video[] {
       keywords: ["Math", "No One", "Conjecture"],
     },
     {
+      id: "005",
       videoLink: "https://www.youtube.com/watch?v=86CQq3pKSUw",
       thumbnail: "thumbnail-5.webp",
       time: "11:17",
@@ -58,6 +63,7 @@ export function readAllVideos(): Video[] {
       keywords: ["Kadane", "Algorithm", "Sum"],
     },
     {
+      id: "006",
       videoLink: "https://www.youtube.com/watch?v=yXWw0_UfSFg",
       thumbnail: "thumbnail-6.webp",
       time: "19:59",
@@ -69,6 +75,7 @@ export function readAllVideos(): Video[] {
       keywords: ["Fit", "Circle", "Pay"],
     },
     {
+      id: "007",
       videoLink: "https://www.youtube.com/watch?v=fNVa1qMbF9Y",
       thumbnail: "thumbnail-7.webp",
       time: "10:13",
@@ -80,6 +87,7 @@ export function readAllVideos(): Video[] {
       keywords: ["Planes", "Tibet"],
     },
     {
+      id: "008",
       videoLink: "https://www.youtube.com/watch?v=lFm4EM1juls",
       thumbnail: "thumbnail-8.webp",
       time: "7:12",
@@ -91,6 +99,7 @@ export function readAllVideos(): Video[] {
       keywords: ["Biggest", "Plane"],
     },
     {
+      id: "009",
       videoLink: "https://www.youtube.com/watch?v=ixmxOlcrlUc",
       thumbnail: "thumbnail-9.webp",
       time: "13:17",
@@ -102,6 +111,7 @@ export function readAllVideos(): Video[] {
       keywords: ["SECRET", "Super", "STRENGTH"],
     },
     {
+      id: "010",
       videoLink: "https://www.youtube.com/watch?v=R2vXbFp5C9o",
       thumbnail: "thumbnail-10.webp",
       time: "7:53",
@@ -113,6 +123,7 @@ export function readAllVideos(): Video[] {
       keywords: ["Largest", "Cruise", "Meals"],
     },
     {
+      id: "011",
       videoLink: "https://www.youtube.com/watch?v=0nZuYyXET3s",
       thumbnail: "thumbnail-11.webp",
       time: "4:10",
@@ -124,6 +135,7 @@ export function readAllVideos(): Video[] {
       keywords: ["Dubai", "Crazy", "Underwater Train"],
     },
     {
+      id: "012",
       videoLink: "https://www.youtube.com/watch?v=9iMGFqMmUFs",
       thumbnail: "thumbnail-12.webp",
       time: "4:51",
@@ -135,4 +147,8 @@ export function readAllVideos(): Video[] {
       keywords: ["happen", "drink", "water"],
     },
   ];
+}
+
+export function readVideoHistory(userId: string): Video[] {
+  return [];
 }
