@@ -1,12 +1,15 @@
-export default interface Video {
-  id: string;
+import { Types } from "mongoose";
+
+export default interface IVideo extends Document {
+  _id: Types.ObjectId[];
   videoLink: string;
   thumbnail: string;
-  time: string;
+  duration: Date;
   title: string;
   stats: string;
   channelLink: string;
   channelPicture: string;
   channelName: string;
   keywords: string[];
+  isRecommended: boolean;
 }
