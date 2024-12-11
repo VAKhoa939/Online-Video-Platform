@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { getVideoList, Video } from "../interfaces/video";
+import { getVideos, Video } from "../interfaces/video";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootState } from "../state/store";
@@ -17,11 +17,11 @@ const SearchBar = ({ size }: Props) => {
   const dispatch = useDispatch();
   const videoMode = useSelector((state: RootState) => state.ui.videoMode);
 
-  const { data: videoList = [] } = useQuery({
+  const { data: videos = [] } = useQuery({
     queryKey: ["video", videoMode, defaultUser],
-    queryFn: async () => getVideoList(videoMode, defaultUser),
+    queryFn: async () => getVideos(videoMode, defaultUser),
   });
-  const keywords = getKeywords(videoList);
+  const keywords = getKeywords(videos);
 
   function onChange(event: React.ChangeEvent<HTMLInputElement>) {
     setValue(event.target.value);
