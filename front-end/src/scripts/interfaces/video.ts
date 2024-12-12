@@ -13,7 +13,7 @@ export interface Video {
   channelPicture: string;
   channelName: string;
   keywords: string[];
-  isRecommended: boolean;
+  isDefaultRecommended: boolean;
 }
 
 const VIDEO_API_URL = `${import.meta.env.VITE_API_URL}/videos`;
