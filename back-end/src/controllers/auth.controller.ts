@@ -72,20 +72,39 @@ export const login = async (req: Request, res: Response) => {
       return;
     }
 
-    const formattedVideos = user.videoHistory.map((video: any) => ({
-      ...video.toObject(),
-      duration: formatDuration(video.duration),
-    }));
-
     res.status(200).json({
       message: "Login successfully",
-      data: { ...user.toObject(), videoHistory: formattedVideos },
     });
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.log("Error during login:", error.message);
       res.status(500).json({
-        message: "Server error",
+        message: "Server error. Please try again later.",
+      });
+    }
+  }
+};
+
+export const getUserByEmail = async (req: Request, res: Response) => {
+  try {
+    const user = await User.findOne({ email: req.body.email })
+      .populate("videoHistory")
+      .exec();
+    if (!user) {
+      res.status(404).send();
+      return;
+    }
+
+    const formattedVideos = user.videoHistory.map((video: any) => ({
+      ...video.toObject(),
+      duration: formatDuration(video.duration),
+    }));
+    res.json({ data: { ...user.toObject(), videoHistory: formattedVideos } });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.log("Error during getUserByEmail:", error.message);
+      res.status(500).json({
+        message: "Server error. Please try again later.",
       });
     }
   }

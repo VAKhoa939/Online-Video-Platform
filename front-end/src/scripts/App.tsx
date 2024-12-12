@@ -7,12 +7,14 @@ import { Provider } from "react-redux";
 import { store } from "./state/store";
 import { AuthProvider } from "./context/AuthProvider";
 import LoginPage from "./pages/auth-pages/LoginPage";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const queryClient = new QueryClient();
 
   return (
     <Provider store={store}>
+      <ToastContainer />
       <AuthProvider>
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>

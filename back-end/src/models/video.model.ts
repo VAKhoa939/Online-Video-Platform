@@ -164,7 +164,7 @@ const videosSchema = new Schema<IVideo>({
   channelPicture: String,
   channelName: String,
   keywords: [String],
-  isRecommended: Boolean,
+  isDefaultRecommended: Boolean,
 });
 
 const Video = model<IVideo>("Video", videosSchema);
