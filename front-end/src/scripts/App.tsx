@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import { store } from "./state/store";
 import { AuthProvider } from "./context/AuthProvider";
 import LoginPage from "./pages/auth-pages/LoginPage";
+import RegisterPage from "./pages/auth-pages/RegisterPage";
 
 function App() {
   const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
             </Routes>
           </BrowserRouter>
         </QueryClientProvider>
