@@ -11,5 +11,5 @@ export default interface IVideo extends Document {
   channelPicture: string;
   channelName: string;
   keywords: string[];
-  isRecommended: boolean;
+  isDefaultRecommended: boolean;
 }
