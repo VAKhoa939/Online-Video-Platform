@@ -2,6 +2,7 @@ import "../../../css/login.css";
 import React, { useState, useEffect, useContext, useRef } from "react";
 import axios from "axios";
 import { FaUser, FaLock } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 
 interface Form {
   email: string;
@@ -62,20 +63,14 @@ const LoginPage = () => {
           />
           <FaLock className="icon" />
         </div>
-
-        <div className="remember-forgot">
-          <label>
-            <input type="checkbox" />
-            Remember me
-          </label>
-        </div>
-        <button type="submit"> Login </button>
-        <div className="register-link">
-          <p>
-            Don't have an account? <a href="#"> Register</a>
-          </p>
-        </div>
-      </form>
+      <div className="remember-forgot">
+        <label><input type="checkbox"/>Remember me</label>
+      </div>
+      <button type = "submit"> Login </button> 
+      <div className="register-link">
+        <p>Don't have an account? <Link to = "/Register"> Register</Link></p>
+      </div>
+    </form>
     </div>
   );
 };
