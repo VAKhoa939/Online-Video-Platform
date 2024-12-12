@@ -1,4 +1,4 @@
-import { getVideoList } from "../../interfaces/video";
+import { getVideos } from "../../interfaces/video";
 import "../../../css/home-page.css";
 import { useQuery } from "@tanstack/react-query";
 import { defaultUser } from "../../interfaces/user";
@@ -18,7 +18,7 @@ const VideoGrid = () => {
     isLoading,
     error,
   } = useQuery({
-    queryFn: () => getVideoList(videoMode, defaultUser),
+    queryFn: () => getVideos(videoMode, defaultUser),
     queryKey: ["videoList", videoMode, defaultUser],
   });
 
@@ -68,7 +68,7 @@ const VideoGrid = () => {
                 }`}
               />
             </a>
-            <div className="video-time">{video.time}</div>
+            <div className="video-time">{video.duration}</div>
           </div>
           <div className="video-info-grid">
             <div className="channel-picture-column">
