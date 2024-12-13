@@ -1,5 +1,5 @@
 import "../../css/header.css";
-import { FaUpload, FaUserCircle } from "react-icons/fa";
+import { FaUpload } from "react-icons/fa";
 import SearchBar from "./SearchBar";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
