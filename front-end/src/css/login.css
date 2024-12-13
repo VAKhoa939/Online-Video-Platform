@@ -18,12 +18,18 @@ body {
   background-position: center;
 }
 .wrapper {
-  width: 420px;
+  width: fit-content;
+  min-width: 420px;
   background: transparent;
   color: #fff;
   border-radius: 10px;
   border: 2px solid rgb(255, 255, 255);
   padding: 30px 40px;
+}
+.wrapper .layout {
+  display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
 }
 .wrapper h1 {
   font-size: 36px;
@@ -93,6 +99,7 @@ body {
     cursor: pointer;
     font-size: #333;
     font-weight: 700;
+    margin-bottom: 10px;
 }
 .wrapper .register-link {
   font-size: 14.5px;
@@ -106,4 +113,8 @@ body {
 }
 .register-link p a:hover {
   text-decoration: underline;
+}
+.info-header {
+  overflow: visible;
+  white-space: nowrap;
 }
