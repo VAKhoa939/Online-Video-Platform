@@ -3,6 +3,7 @@ import { FaUpload, FaUserCircle } from "react-icons/fa";
 import SearchBar from "./SearchBar";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import DropdownMenu from "./DropDownMenu";
 const ICON_SIZE = 24;
 
 const Header = () => {
@@ -22,13 +23,10 @@ const Header = () => {
         {auth.email ? (
           <>
             <div className="icon-container">
-              <FaUpload size={ICON_SIZE} />
+              <FaUpload size={ICON_SIZE} onClick={() => navigate("/upload")} />
               <div className="tooltip">Create video</div>
             </div>
-            <div className="icon-container">
-              <FaUserCircle size={ICON_SIZE} onClick={() => navigate("#")} />
-              <div className="tooltip">User email</div>
-            </div>
+            <DropdownMenu />
           </>
         ) : (
           <button className="login-button" onClick={() => navigate("/login")}>

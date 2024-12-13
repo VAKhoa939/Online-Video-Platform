@@ -11,6 +11,7 @@ import LoginPage from "./pages/auth-pages/LoginPage";
 import { ToastContainer } from "react-toastify";
 import RegisterPage from "./pages/auth-pages/RegisterPage";
 import { COUNTDOWN } from "./utils/toast";
+import UploadVideo from "./header/UploadVideo";
 
 function App() {
   const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
+              <Route path="/upload" element={<UploadVideo />} />
             </Routes>
           </BrowserRouter>
         </QueryClientProvider>
