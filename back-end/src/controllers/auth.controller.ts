@@ -91,7 +91,9 @@ export const getUserByEmail = async (req: Request, res: Response) => {
       .populate("videoHistory")
       .exec();
     if (!user) {
-      res.status(404).send();
+      res
+        .status(500)
+        .json({ message: "Server Error. Please try again later." });
       return;
     }
 

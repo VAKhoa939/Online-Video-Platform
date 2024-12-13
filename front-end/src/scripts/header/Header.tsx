@@ -3,7 +3,6 @@ import { FaUpload, FaBell, FaUserCircle } from "react-icons/fa";
 import SearchBar from "./SearchBar";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import icon from "../../assets/icon.png";
 const ICON_SIZE = 24;
 
 const Header = () => {
@@ -25,11 +24,6 @@ const Header = () => {
             <div className="icon-container">
               <FaUpload size={ICON_SIZE} />
               <div className="tooltip">Create video</div>
-            </div>
-            <div className="icon-container">
-              <FaBell size={ICON_SIZE} />
-              <div className="notifications-count">3</div>
-              <div className="tooltip">Notifications</div>
             </div>
             <div className="icon-container">
               <FaUserCircle size={ICON_SIZE} onClick={() => navigate("#")} />
