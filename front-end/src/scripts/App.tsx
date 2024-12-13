@@ -11,7 +11,7 @@ import LoginPage from "./pages/auth-pages/LoginPage";
 import { ToastContainer } from "react-toastify";
 import RegisterPage from "./pages/auth-pages/RegisterPage";
 import { COUNTDOWN } from "./utils/toast";
-import UploadVideo from "./header/UploadVideo";
+import UploadVideo from "./pages/upload-video-page/UploadVideoPage";
 
 function App() {
   const queryClient = new QueryClient();

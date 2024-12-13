@@ -39,7 +39,7 @@ export const register = async (req: Request, res: Response) => {
     await newUser.save();
 
     res.status(201).json({
-      message: "Register successfully",
+      message: "Welcome, " + newUser.email,
     });
   } catch (error: unknown) {
     if (error instanceof Error) {
@@ -73,7 +73,7 @@ export const login = async (req: Request, res: Response) => {
     }
 
     res.status(200).json({
-      message: "Login successfully",
+      message: "Welcome, " + user.email,
     });
   } catch (error: unknown) {
     if (error instanceof Error) {
