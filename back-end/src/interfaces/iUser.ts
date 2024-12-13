@@ -7,5 +7,6 @@ export default interface IUser extends Document {
   password: string;
   avatar: string;
   videoHistory: Types.ObjectId[];
+  myVideos: Types.ObjectId[];
   isAdmin: boolean;
 }

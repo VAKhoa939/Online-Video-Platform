@@ -5,7 +5,7 @@ import { formatDuration } from "../utils/durationUtils";
 export const getUserById = async (req: Request, res: Response) => {
   try {
     const user = await User.findById(req.params.id)
-      .populate("videoHistory")
+      .populate(["videoHistory", "myVideos"])
       .exec();
     if (!user) {
       return res

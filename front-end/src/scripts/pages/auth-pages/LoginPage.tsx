@@ -1,20 +1,34 @@
 import "../../../css/login.css";
-import React, { useState, useEffect, useContext, useRef } from "react";
-import axios from "axios";
+import React, { useState, useEffect, useRef } from "react";
 import { FaUser, FaLock } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import { useMutation } from "react-query";
+import { AuthResponse, login, LoginForm } from "../../interfaces/auth";
+import { toast } from "react-toastify";
+import { isAxiosError } from "axios";
+import { useAuth } from "../../hooks/useAuth";
 
-interface Form {
-  email: string;
-  password: string;
-}
 const LoginPage = () => {
   const formRef = useRef<HTMLInputElement>(null);
-  const errRef = useRef();
-  const [form, setForm] = useState<Form>({} as Form);
-  const [errMsg, setErrMsg] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [form, setForm] = useState<LoginForm>({} as LoginForm);
+  const { setAuth } = useAuth();
+  const navigate = useNavigate();
 
+  const mutation = useMutation<AuthResponse, Error, LoginForm>(login, {
+    onSuccess: (data) => {
+      toast.success(data.message);
+      localStorage.setItem("email", form.email);
+      setAuth((prev) => ({ ...prev, email: form.email }));
+      navigate("/");
+    },
+    onError: (error) => {
+      const errorMessage =
+        isAxiosError(error) && error.response
+          ? error.response?.data?.message
+          : "Something went wrong";
+      toast.error(errorMessage);
+    },
+  });
   function onChange(event: React.ChangeEvent<HTMLInputElement>) {
     setForm((previous) => ({
       ...previous,
@@ -23,14 +37,12 @@ const LoginPage = () => {
   }
   function onSubmit(event: React.ChangeEvent<HTMLFormElement>) {
     event.preventDefault();
+    mutation.mutate(form);
   }
   useEffect(() => {
     if (!formRef.current) return;
     formRef.current.focus();
   }, []);
-  useEffect(() => {
-    setErrMsg("");
-  }, [form.email, form.password]);
 
   return (
     <div className="wrapper">
@@ -63,14 +75,19 @@ const LoginPage = () => {
           />
           <FaLock className="icon" />
         </div>
-      <div className="remember-forgot">
-        <label><input type="checkbox"/>Remember me</label>
-      </div>
-      <button type = "submit"> Login </button> 
-      <div className="register-link">
-        <p>Don't have an account? <Link to = "/Register"> Register</Link></p>
-      </div>
-    </form>
+        <div className="remember-forgot">
+          <label>
+            <input type="checkbox" />
+            Remember me
+          </label>
+        </div>
+        <button type="submit"> Login </button>
+        <div className="register-link">
+          <p>
+            Don't have an account? <Link to="/Register"> Register</Link>
+          </p>
+        </div>
+      </form>
     </div>
   );
 };

@@ -21,15 +21,15 @@
   border: none;
   outline: none;
   border-radius: 50px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   font-size: #333;
   font-weight: 700;
-
 }
 .middle-section {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex: 1;
   max-width: 470px;
 }
@@ -130,35 +130,22 @@
   width: 182px;
   display: flex;
   justify-content: end;
-  gap: 20px;
+  gap: 50px;
   align-items: center;
-  padding: 0 20px;  
+  padding-right: 30px;
   flex-shrink: 0;
+  color: rgb(200, 200, 200);
 }
-.right-section .login-button{
+
+.right-section .login-button {
   width: 50%;
   height: 30px;
-  color: #fff;
   background: slateblue;
   border: none;
   outline: none;
   border-radius: 40px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   font-size: #333;
   font-weight: 700;
-}
-.notifications-count {
-  position: absolute;
-  top: -3px;
-  right: -7px;
-  background-color: rgb(204, 0, 0);
-  font-size: 10px;
-  color: white;
-  padding: 0 5px;
-  border-radius: 80px;
-  border: 2px solid white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }

@@ -1,11 +1,12 @@
 import { getVideos } from "../../interfaces/video";
 import "../../../css/home-page.css";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "react-query";
 import { defaultUser } from "../../interfaces/user";
 import { useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { isAxiosError } from "axios";
 
 const VideoGrid = () => {
   const searchTerm = useSelector((state: RootState) => state.ui.searchTerm);
@@ -25,7 +26,12 @@ const VideoGrid = () => {
   if (error)
     return (
       <div className="container">
-        <p>Error: {error.message}</p>
+        <p>
+          Error:{" "}
+          {isAxiosError(error) && error.response
+            ? error.response?.data?.message
+            : "Something went wrong"}
+        </p>
       </div>
     );
   if (isLoading)
@@ -53,7 +59,6 @@ const VideoGrid = () => {
   const filteredVideoList = videoList.filter((video) =>
     video.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  console.log(filteredVideoList);
 
   return (
     <div className="video-grid">

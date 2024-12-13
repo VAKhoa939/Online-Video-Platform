@@ -37,7 +37,6 @@ export const getAllVideos = async (req: Request, res: Response) => {
   try {
     const videos = await Video.find();
     const formattedVideos = videos.map((video) => {
-      console.log(typeof video.duration);
       const duration = formatDuration(video.duration);
       return { ...video.toObject(), duration };
     });
