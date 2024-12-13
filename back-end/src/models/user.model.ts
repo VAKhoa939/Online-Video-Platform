@@ -12,6 +12,12 @@ const usersSchema = new Schema<IUser>({
       ref: "Video",
     },
   ],
+  myVideos: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Video",
+    },
+  ],
   isAdmin: Boolean,
 });
 

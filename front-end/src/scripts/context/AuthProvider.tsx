@@ -28,13 +28,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       toast.error("You are not logged in");
       return;
     }
-    setAuth((prev) => ({ ...prev, email }));
 
     const fetchUser = async () => {
       try {
-        const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth`);
+        console.log(email);
+        const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth`, {
+          email: email,
+        });
         const { data } = res.data;
-        setAuth((prev) => ({ ...prev, user: data as User }));
+        setAuth((prev) => ({ ...prev, email, user: data as User }));
       } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
           const { message } = error.response.data;

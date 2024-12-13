@@ -1,7 +1,8 @@
 import Header from "./header/Header";
 import "../css/general.css";
+import "react-toastify/dist/ReactToastify.css";
 import HomePage from "./pages/home-page/HomePage";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./state/store";
@@ -9,13 +10,14 @@ import { AuthProvider } from "./context/AuthProvider";
 import LoginPage from "./pages/auth-pages/LoginPage";
 import { ToastContainer } from "react-toastify";
 import RegisterPage from "./pages/auth-pages/RegisterPage";
+import { COUNTDOWN } from "./utils/toast";
 
 function App() {
   const queryClient = new QueryClient();
 
   return (
     <Provider store={store}>
-      <ToastContainer />
+      <ToastContainer theme="dark" autoClose={COUNTDOWN} />
       <AuthProvider>
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
