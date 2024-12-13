@@ -1,31 +1,54 @@
-import { getVideos } from "../../interfaces/video";
+import {
+  getRecommendedVideos,
+  getVideoHistory,
+  Video,
+} from "../../interfaces/video";
 import "../../../css/home-page.css";
-import { useQuery } from "@tanstack/react-query";
-import { defaultUser } from "../../interfaces/user";
+import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { isAxiosError } from "axios";
+import { useEffect, useState } from "react";
 
 const VideoGrid = () => {
   const searchTerm = useSelector((state: RootState) => state.ui.searchTerm);
   const videoMode = useSelector((state: RootState) => state.ui.videoMode);
+  const [videos, setVideos] = useState<Video[]>([] as Video[]);
   const { auth } = useAuth();
   const navigate = useNavigate();
 
   const {
-    data: videoList,
+    data: recomendedVideos,
     isLoading,
     error,
   } = useQuery({
-    queryFn: () => getVideos(videoMode, defaultUser),
-    queryKey: ["videoList", videoMode, defaultUser],
+    queryFn: () => getRecommendedVideos(auth.user),
+    queryKey: ["videos", videoMode, auth.user],
+    enabled: videoMode === "recommend",
   });
+
+  useEffect(() => {
+    if (videoMode === "history") {
+      setVideos(getVideoHistory(auth.user));
+      return;
+    }
+    if (recomendedVideos && typeof recomendedVideos !== "undefined") {
+      setVideos(recomendedVideos);
+      return;
+    }
+  }, [videoMode, auth.user, recomendedVideos]);
 
   if (error)
     return (
       <div className="container">
-        <p>Error: {error.message}</p>
+        <p>
+          Error:{" "}
+          {isAxiosError(error) && error.response
+            ? error.response?.data?.message
+            : "Something went wrong"}
+        </p>
       </div>
     );
   if (isLoading)
@@ -35,7 +58,7 @@ const VideoGrid = () => {
       </div>
     );
 
-  if (!videoList || videoList.length === 0) {
+  if (!videos || videos.length === 0) {
     return (
       <div className="container">
         {videoMode === "history" && !auth.email ? (
@@ -50,10 +73,9 @@ const VideoGrid = () => {
     );
   }
 
-  const filteredVideoList = videoList.filter((video) =>
+  const filteredVideoList = videos.filter((video) =>
     video.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  console.log(filteredVideoList);
 
   return (
     <div className="video-grid">

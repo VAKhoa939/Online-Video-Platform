@@ -1,7 +1,7 @@
 import { Types } from "mongoose";
 
 export default interface IVideo extends Document {
-  _id: Types.ObjectId[];
+  _id: Types.ObjectId;
   videoLink: string;
   thumbnail: string;
   duration: Date;
@@ -11,5 +11,5 @@ export default interface IVideo extends Document {
   channelPicture: string;
   channelName: string;
   keywords: string[];
-  isRecommended: boolean;
+  isDefaultRecommended: boolean;
 }

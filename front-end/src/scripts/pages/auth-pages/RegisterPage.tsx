@@ -1,20 +1,20 @@
 import "../../../css/form.css";
 import React, { useState, useEffect, useRef } from "react";
 import { FaUser, FaLock } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
-import { AuthResponse, login, LoginForm } from "../../interfaces/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthResponse, register, RegisterForm } from "../../interfaces/auth";
 import { toast } from "react-toastify";
 import { isAxiosError } from "axios";
 import { useAuth } from "../../hooks/useAuth";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const formRef = useRef<HTMLInputElement>(null);
-  const [form, setForm] = useState<LoginForm>({} as LoginForm);
+  const [form, setForm] = useState<RegisterForm>({} as RegisterForm);
   const { setAuth } = useAuth();
   const navigate = useNavigate();
 
-  const mutation = useMutation<AuthResponse, Error, LoginForm>(login, {
+  const mutation = useMutation<AuthResponse, Error, RegisterForm>(register, {
     onSuccess: (data) => {
       toast.success(data.message);
       localStorage.setItem("email", form.email);
@@ -29,6 +29,7 @@ const LoginPage = () => {
       toast.error(errorMessage);
     },
   });
+
   function onChange(event: React.ChangeEvent<HTMLInputElement>) {
     setForm((previous) => ({
       ...previous,
@@ -47,7 +48,19 @@ const LoginPage = () => {
   return (
     <div className="wrapper">
       <form onSubmit={onSubmit}>
-        <h1>Login</h1>
+        <h1>Register</h1>
+        <div className="input-box">
+          <input
+            type="text"
+            name="userName"
+            ref={formRef}
+            value={form.userName}
+            onChange={onChange}
+            placeholder="User name"
+            required
+          />
+          <FaUser className="icon" />
+        </div>
         <div className="input-box">
           <input
             type="text"
@@ -57,7 +70,6 @@ const LoginPage = () => {
             onChange={onChange}
             placeholder="E-mail"
             required
-            autoComplete="on"
           />
           <FaUser className="icon" />
         </div>
@@ -71,20 +83,27 @@ const LoginPage = () => {
             onChange={onChange}
             placeholder="Password"
             required
-            autoComplete="on"
           />
           <FaLock className="icon" />
         </div>
-        <div className="remember-forgot">
-          <label>
-            <input type="checkbox" />
-            Remember me
-          </label>
+
+        <div className="input-box">
+          <input
+            type="password"
+            name="confirmPassword"
+            ref={formRef}
+            value={form.confirmPassword}
+            onChange={onChange}
+            placeholder="Confirm Password"
+            required
+          />
+          <FaLock className="icon" />
         </div>
-        <button type="submit"> Login </button>
+
+        <button type="submit"> Register </button>
         <div className="register-link">
           <p>
-            Don't have an account? <Link to="/Register"> Register</Link>
+            Already have an account? <Link to="/Login"> Login</Link>
           </p>
         </div>
       </form>
@@ -92,4 +111,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

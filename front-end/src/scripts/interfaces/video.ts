@@ -1,4 +1,3 @@
-import { VideoMode } from "./uiState";
 import { User } from "./user";
 import axios from "axios";
 
@@ -13,23 +12,21 @@ export interface Video {
   channelPicture: string;
   channelName: string;
   keywords: string[];
-  isRecommended: boolean;
+  isDefaultRecommended: boolean;
 }
 
 const VIDEO_API_URL = `${import.meta.env.VITE_API_URL}/videos`;
 
-export async function getRecommendedVideos(): Promise<Video[]> {
-  const res = await axios.get(VIDEO_API_URL + "/recommend");
+export async function getRecommendedVideos(
+  user: User | null
+): Promise<Video[]> {
+  let route = "/recommend";
+  if (user && user.videoHistory.length) route += `/${user._id}`;
+  const res = await axios.get(VIDEO_API_URL + route);
   return await res.data.data;
 }
 
-export async function getVideoHistory(user: User): Promise<Video[]> {
-  const res = await axios.get(VIDEO_API_URL + "/history/" + user.id);
-  return res.data.data;
+export function getVideoHistory(user: User | null) {
+  if (user && user.videoHistory.length) return [...user.videoHistory];
+  return [] as Video[];
 }
-
-export const getVideos = (videoMode: VideoMode, user: User) => {
-  return videoMode === "history"
-    ? getVideoHistory(user)
-    : getRecommendedVideos();
-};

@@ -1,9 +1,9 @@
 import "../../css/header.css";
-import { FaUpload, FaBell, FaUserCircle } from "react-icons/fa";
+import { FaUpload, FaUserCircle } from "react-icons/fa";
 import SearchBar from "./SearchBar";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-
+import DropdownMenu from "./DropDownMenu";
 const ICON_SIZE = 24;
 
 const Header = () => {
@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <header className="header">
       <div className="left-section">
-        <h1 onClick={() => navigate("/")}>Online Video Platform</h1>
+        <h1 onClick={() => navigate("/")}>Ontube</h1>
       </div>
 
       <div className="middle-section">
@@ -20,22 +20,18 @@ const Header = () => {
       </div>
 
       <div className="right-section">
-        <div className="icon-container">
-          <FaUpload size={ICON_SIZE} />
-          <div className="tooltip">Create video</div>
-        </div>
-        <div className="icon-container">
-          <FaBell size={ICON_SIZE} />
-          <div className="notifications-count">3</div>
-          <div className="tooltip">Notifications</div>
-        </div>
         {auth.email ? (
-          <div className="icon-container">
-            <FaUserCircle size={ICON_SIZE} onClick={() => navigate("#")} />
-            <div className="tooltip">User email</div>
-          </div>
+          <>
+            <div className="icon-container">
+              <FaUpload size={ICON_SIZE} onClick={() => navigate("/upload")} />
+              <div className="tooltip">Create video</div>
+            </div>
+            <DropdownMenu />
+          </>
         ) : (
-          <button onClick={() => navigate("/login")}>Login</button>
+          <button className="login-button" onClick={() => navigate("/login")}>
+            Sign in
+          </button>
         )}
       </div>
     </header>

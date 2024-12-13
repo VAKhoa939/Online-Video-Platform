@@ -1,13 +1,21 @@
+import { Video } from "./video";
+
 export interface User {
-  id: string;
+  _id: string;
+  userName: string;
   email: string;
   password: string;
-  watchedList: string[];
+  avatar: string;
+  videoHistory: Video[];
+  isAdmin: boolean;
 }
 
 export const defaultUser: User = {
-  id: "000",
+  _id: "",
+  userName: "",
   email: "",
   password: "",
-  watchedList: [],
+  avatar: "",
+  videoHistory: [] as Video[],
+  isAdmin: false,
 };

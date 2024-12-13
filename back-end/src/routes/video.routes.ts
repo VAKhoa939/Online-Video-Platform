@@ -1,13 +1,12 @@
 import { Router } from "express";
 import {
   getAllVideos,
-  getRecommendedVideos,
-  getVideoHistory,
+  getDefaultRecommendedVideos,
 } from "../controllers/video.controller";
 
 const router = Router();
 
-router.route("/recommend").get(getAllVideos);
-router.route("/history/:userId").get(getAllVideos);
+router.route("/recommend").get(getDefaultRecommendedVideos);
+router.route("/recommend/:userId").get(getAllVideos);
 
 export default router;
