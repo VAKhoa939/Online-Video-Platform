@@ -1,14 +1,13 @@
 import { isAxiosError } from "axios";
-import { IoCloseCircle } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 import { useRef, useState, useEffect } from "react";
 import { useMutation } from "react-query";
-import { RegisterForm, AuthResponse, register } from "../interfaces/auth";
-import UploadButton from "./UploadButton";
-import "../../css/login.css";
-const ICON_SIZE = 24;
+import { RegisterForm, AuthResponse, register } from "../../interfaces/auth";
+import UploadButton from "./UploadImageButton";
+import "../../../css/form.css";
+
 const UploadVideo = () => {
   const formRef = useRef<HTMLInputElement>(null);
   const [form, setForm] = useState<RegisterForm>({} as RegisterForm);

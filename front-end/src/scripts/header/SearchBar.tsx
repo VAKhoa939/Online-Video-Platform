@@ -1,12 +1,16 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { getVideos, Video } from "../interfaces/video";
+import {
+  getRecommendedVideos,
+  getVideoHistory,
+  Video,
+} from "../interfaces/video";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootState } from "../state/store";
 import { useQuery } from "react-query";
-import { defaultUser } from "../interfaces/user";
 import { setSearchTerm } from "../state/uiSlice";
+import { useAuth } from "../hooks/useAuth";
 
 interface Props {
   size: number;
@@ -16,11 +20,25 @@ const SearchBar = ({ size }: Props) => {
   const [value, setValue] = useState("");
   const dispatch = useDispatch();
   const videoMode = useSelector((state: RootState) => state.ui.videoMode);
+  const [videos, setVideos] = useState<Video[]>([] as Video[]);
+  const { auth } = useAuth();
 
-  const { data: videos = [] } = useQuery({
-    queryKey: ["video", videoMode, defaultUser],
-    queryFn: async () => getVideos(videoMode, defaultUser),
+  const { data: recomendedVideos } = useQuery({
+    queryFn: () => getRecommendedVideos(auth.user),
+    queryKey: ["videos", videoMode, auth.user],
+    enabled: videoMode === "recommend",
   });
+
+  useEffect(() => {
+    if (videoMode === "history") {
+      setVideos(getVideoHistory(auth.user));
+      return;
+    }
+    if (recomendedVideos && typeof recomendedVideos !== "undefined") {
+      setVideos(recomendedVideos);
+      return;
+    }
+  }, [videoMode, auth.user, recomendedVideos]);
   const keywords = getKeywords(videos);
 
   function onChange(event: React.ChangeEvent<HTMLInputElement>) {
